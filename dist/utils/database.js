@@ -1,14 +1,16 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
-const qrcode_1 = __importDefault(require("../models/qrcode"));
-qrcode_1.default.sync();
-const db = new sequelize_1.Sequelize('postgres://josholloqui:postgres@localhost:5432/postgres', {
+const db = new sequelize_1.Sequelize('postgres://nunbuxlxmniuch:5e5118ecc5c0d6aa99f457f18ddcef5a6afef1ccb3498d701bb4a4e931336f30@ec2-54-164-134-207.compute-1.amazonaws.com:5432/d7bbfler556rcb', {
     host: 'localhost',
     dialect: 'postgres',
+    ssl: true,
+    dialectOptions: {
+        ssl: {
+            require: true,
+            rejectUnauthorized: false
+        }
+    },
     pool: {
         max: 5,
         min: 0,
