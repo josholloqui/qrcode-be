@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const server_1 = __importDefault(require("./server"));
 const port = parseInt(process.env.PORT || '4000');
 const starter = new server_1.default().start(port)
-    .then(port => console.log(`Running on port ${port}`))
+    .then(Port => console.log(`Running on port ${Port}`))
     .catch(error => {
     console.log(error);
 });

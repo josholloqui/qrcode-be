@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
+const qrcodes_1 = __importDefault(require("./routers/qrcodes"));
 const database_1 = __importDefault(require("./utils/database"));
 class Server {
     constructor() {
@@ -30,6 +31,7 @@ class Server {
             .catch(err => console.log('Error: ' + err));
     }
     routerConfig() {
+        this.app.use('/qrcodes', qrcodes_1.default);
     }
 }
 exports.default = Server;

@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import qrcodeRouter from './routers/qrcodes';
 import db from './utils/database';
 
 class Server {
@@ -24,7 +25,7 @@ class Server {
   }
 
   private routerConfig() {
-
+    this.app.use('/qrcodes', qrcodeRouter);
   }
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
