@@ -3,8 +3,10 @@ import bodyParser from 'body-parser';
 import qrcodeRouter from './routers/qrcodes';
 import db from './utils/database';
 
+import config from './utils/config';
+
 class Server {
-  private app;
+  public app: express.Application;
 
   constructor() {
     this.app = express();
@@ -14,6 +16,7 @@ class Server {
   }
 
   private config() {
+    this.app.set('port', config.app.PORT);
     this.app.use(bodyParser.urlencoded({ extended: true }));
     this.app.use(bodyParser.json({ limit: '1mb' }));
   }
@@ -29,13 +32,16 @@ class Server {
   }
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  public start = (port: number) => {
-    return new Promise((resolve, reject) => {
-      this.app.listen(port, () => {
-        resolve(port);
-      }).on('error', (err: any) => reject(err));
+  public start() {
+    this.config();
+    this.app.listen(this.app.get('port'), () => {
+      console.log('Server is listening on port ' + this.app.get('port'));
     });
-  }
+    this.routerConfig();
+    this.dbConnect();
+}
 }
 
-export default Server;
+const server = new Server();
+server.start();
+module.exports = server.app;
