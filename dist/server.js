@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const qrcodes_1 = __importDefault(require("./routers/qrcodes"));
 const database_1 = __importDefault(require("./utils/database"));
+const cors_1 = __importDefault(require("cors"));
 const config_1 = __importDefault(require("./utils/config"));
 class Server {
     constructor() {
@@ -30,6 +31,10 @@ class Server {
     }
     start() {
         this.config();
+        this.app.use(cors_1.default({
+            origin: true,
+            credentials: true
+        }));
         this.app.listen(this.app.get('port'), () => {
             console.log('Server is listening on port ' + this.app.get('port'));
         });

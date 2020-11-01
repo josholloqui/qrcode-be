@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import qrcodeRouter from './routers/qrcodes';
 import db from './utils/database';
-
+import cors from 'cors';
 import config from './utils/config';
 
 class Server {
@@ -34,6 +34,10 @@ class Server {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   public start() {
     this.config();
+    this.app.use(cors({
+      origin: true,
+      credentials: true
+    }));
     this.app.listen(this.app.get('port'), () => {
       console.log('Server is listening on port ' + this.app.get('port'));
     });
