@@ -27,14 +27,11 @@ class Server {
             .catch(err => console.log('Error: ' + err));
     }
     routerConfig() {
+        this.app.use(cors_1.default());
         this.app.use('/qrcodes', qrcodes_1.default);
     }
     start() {
         this.config();
-        this.app.use(cors_1.default({
-            origin: true,
-            credentials: true
-        }));
         this.app.listen(this.app.get('port'), () => {
             console.log('Server is listening on port ' + this.app.get('port'));
         });
